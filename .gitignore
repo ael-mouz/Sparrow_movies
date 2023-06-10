@@ -1,0 +1,57 @@
+# Dependency directories
+/node_modules
+/.pnp
+.pnp.js
+
+# Build files
+/build
+/dist
+
+# Environment variables
+/.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Log files
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+/*.log
+
+# Cache and compiled files
+/.cache
+/.sass-cache
+/css
+/*.css
+/*.css.map
+/*.scss
+/*.scss.map
+/*.sass
+/*.sass.map
+/*.less
+/*.less.map
+/*.styl
+/*.styl.map
+/coverage
+/.nyc_output
+
+# Testing
+/coverage
+/.nyc_output
+
+# Editor and IDE files
+/.idea
+/.vscode
+/.DS_Store
+/*.sublime-*
+/*.swo
+/*.swp
+/*.tmp
+/*.sublime-workspace
+/*.project
+/*.tmproj
+/*.iml
+/.history
+/.metadata
