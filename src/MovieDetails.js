@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import logo from "./assets/logo_SP_D.png";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -45,11 +47,19 @@ const MovieDetails = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-900">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-900">
+        <p className="text-white">Error: {error}</p>
+      </div>
+    );
   }
 
   return (
@@ -59,6 +69,15 @@ const MovieDetails = () => {
         style={{ backgroundImage: `url(${movie.background_image})` }}
       ></div>
       <div className="relative z-10 bg-gray-900 bg-opacity-75 min-h-screen">
+        <nav className="relative z-10 bg-opacity-75">
+        <div className="container mx-auto flex items-center justify-between">
+          <Link to="/" className="text-2xl font-bold text-white">
+          <div className="flex items-center justify-center" style={{ width:"80px"}}>
+              <img  src={logo} alt="img" />
+            </div>
+          </Link>
+        </div>
+      </nav>
         <div className="container mx-auto py-8">
           <motion.div
             initial={{ opacity: 0 }}
@@ -105,12 +124,13 @@ const MovieDetails = () => {
                         {movie.cast.map((castMember) => (
                           <div
                             key={castMember.imdb_code}
-                            className="text-center"
+                            className="flex-auto text-center"
                           >
                             <img
                               src={castMember.url_small_image}
                               alt={castMember.name}
-                              className="rounded-full w-24 mx-auto mb-2"
+                              // className="rounded-full w-24 mx-auto mb-2"
+                              className="h-12 w-12  rounded-full mx-auto mb-2 bg-gray-50"
                             />
                             <p className="text-gray-300">{castMember.name}</p>
                             <p className="text-gray-400">
@@ -161,16 +181,16 @@ const MovieDetails = () => {
               </button>
             </div>
             <div className="modal-body p-4 flex justify-center">
-              <div className="relative pb-9/16">
+              {/* <div className="relative pb-9/16"> */}
                 <iframe
-                  width="700"
+                  width="600"
                   height="400"
                   className="embed-responsive-item"
                   src={`https://www.youtube.com/embed/${movie.yt_trailer_code}`}
                   title="Movie Trailer"
                   allowFullScreen
                 ></iframe>
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </motion.div>
@@ -197,7 +217,7 @@ const MovieDetails = () => {
             </div>
             <div className="modal-body flex flex-wrap justify-around p-4">
               {movie.torrents.map((torrent, index) => (
-                <div key={torrent.size} className="flex items-center mb-4 p-3">
+                <div key={torrent.size} className="flex items-center mb-4 p-3 px-5">
                   <p className="font-semibold mr-2">
                     Quality: {torrent.quality} ({torrent.type})
                   </p>
