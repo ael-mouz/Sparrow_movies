@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import logo from "./assets/logo_SP_D.png";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -74,10 +75,12 @@ const MovieList = () => {
 
   return (
     <div className="container-fluid bg-gray-900">
-      <nav className="bg-gray-100 py-4">
+      <nav className="bg-gray-900">
         <div className="container mx-auto flex items-center justify-between">
           <Link to="/" className="text-2xl font-bold text-black">
-            SPARROW Movies
+            <div className="flex items-center" style={{width:"100px"}}>
+            <img src={logo} alt="logo" />
+            </div>
           </Link>
           <form className="flex">
             <input
@@ -92,7 +95,7 @@ const MovieList = () => {
         </div>
       </nav>
       <div className="container bg-gray-900 mx-auto pt-8">
-        <div className="bg-gray-100 py-4 rounded">
+        <div className="bg-gray-100 py-2 rounded">
           <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
             <div className="relative">
               <select
@@ -171,7 +174,7 @@ const MovieList = () => {
                   className="object-cover w-full"
                   alt={movie.title}
                 />
-                <div className="p-4">
+                <div className="px-4">
                   <h1 className="text-xl font-semibold mb-2">{movie.title}</h1>
                   <p className="text-sm text-gray-700">
                     {movie.rating} / 10 | {movie.year} | {movie.runtime} min
