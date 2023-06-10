@@ -1,7 +1,7 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import logo from "./assets/logo_SP_D.png";
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -74,12 +74,10 @@ const MovieList = () => {
 
   return (
     <div className="container-fluid bg-gray-900">
-      <nav className=" bg-gray-900">
+      <nav className="bg-gray-100 py-4">
         <div className="container mx-auto flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-white">
-            <div className="flex items-center justify-center" style={{ width:"80px"}}>
-              <img  src={logo} alt="img" />
-            </div>
+          <Link to="/" className="text-2xl font-bold text-black">
+            SPARROW Movies
           </Link>
           <form className="flex">
             <input
@@ -94,7 +92,7 @@ const MovieList = () => {
         </div>
       </nav>
       <div className="container bg-gray-900 mx-auto pt-8">
-        <div className="bg-white py-2 rounded">
+        <div className="bg-gray-100 py-4 rounded">
           <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
             <div className="relative">
               <select
@@ -161,11 +159,11 @@ const MovieList = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 mt-7 " >
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 mt-7">
           {movies?.map((movie) => (
             <div
               key={movie.id}
-              className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105 h-5"
+              className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105"
             >
               <Link to={`/movies/${movie.id}`}>
                 <img
@@ -196,13 +194,14 @@ const MovieList = () => {
                 Previous
               </button>
             </li>
-            {[...Array(5)].map((_, index) => {
+            {[...Array(10)].map((_, index) => {
               const uniqueId = `page-item-${index}`;
               return (
                 <li
                   key={uniqueId}
-                  className={`${options.page === index + 1 ? "bg-blue-500" : "bg-gray-300"
-                    } hover:bg-blue-500 text-white font-bold py-2 px-4`}
+                  className={`${
+                    options.page === index + 1 ? "bg-blue-500" : "bg-gray-300"
+                  } hover:bg-blue-500 text-white font-bold py-2 px-4`}
                 >
                   <button
                     className="rounded-lg"
