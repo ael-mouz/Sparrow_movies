@@ -9,6 +9,9 @@ const MovieList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [genres, setGenres] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1); // Replace with the actual total number of pages
+
   const [options, setOptions] = useState({
     limit: 50,
     page: 1,
@@ -28,6 +31,7 @@ const MovieList = () => {
       try {
         const response = await axios.get(url, { params: options });
         setMovies(response.data.data.movies);
+        setTotalPages(Math.ceil(response.data.data.movie_count / options.limit));
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -74,12 +78,12 @@ const MovieList = () => {
   }
 
   return (
-    <div className="container-fluid bg-gray-900">
+    <div className="container-fluid bg-gray-900 min-h-screen">
       <nav className="bg-gray-900">
         <div className="container mx-auto flex items-center justify-between">
           <Link to="/" className="text-2xl font-bold text-black">
-            <div className="flex items-center" style={{width:"100px"}}>
-            <img src={logo} alt="logo" />
+            <div className="flex items-center" style={{ width: "100px" }}>
+              <img src={logo} alt="logo" />
             </div>
           </Link>
           <form className="flex">
@@ -162,7 +166,7 @@ const MovieList = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 mt-7">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 mt-7">
           {movies?.map((movie) => (
             <div
               key={movie.id}
@@ -174,7 +178,7 @@ const MovieList = () => {
                   className="object-cover w-full"
                   alt={movie.title}
                 />
-                <div className="px-4">
+                <div className="p-4">
                   <h1 className="text-xl font-semibold mb-2">{movie.title}</h1>
                   <p className="text-sm text-gray-700">
                     {movie.rating} / 10 | {movie.year} | {movie.runtime} min
@@ -189,41 +193,27 @@ const MovieList = () => {
             <li>
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-l-lg"
-                value={options.page}
-                onClick={(e) =>
-                  handleOptionChange("page", parseInt(e.target.value - 1))
+                onClick={(e) => {
+                  currentPage > 1 ? handleOptionChange("page", currentPage - 1) : handleOptionChange("page", currentPage)
+                  currentPage > 1 ? setCurrentPage(currentPage - 1) : setCurrentPage(currentPage)
+                }
                 }
               >
                 Previous
               </button>
             </li>
-            {[...Array(10)].map((_, index) => {
-              const uniqueId = `page-item-${index}`;
-              return (
-                <li
-                  key={uniqueId}
-                  className={`${
-                    options.page === index + 1 ? "bg-blue-500" : "bg-gray-300"
-                  } hover:bg-blue-500 text-white font-bold py-2 px-4`}
-                >
-                  <button
-                    className="rounded-lg"
-                    value={options.page}
-                    onClick={() =>
-                      handleOptionChange("page", parseInt(index + 1))
-                    }
-                  >
-                    {index + 1}
-                  </button>
-                </li>
-              );
-            })}
+            <li
+              className={`bg-blue-500 text-white font-bold py-2 px-4`}
+            >
+              {currentPage + " of " + totalPages}
+            </li>
             <li>
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r-lg"
-                value={options.page}
-                onClick={(e) =>
-                  handleOptionChange("page", parseInt(e.target.value + 1))
+                onClick={(e) => {
+                  currentPage < totalPages ? handleOptionChange("page", currentPage + 1) : handleOptionChange("page", currentPage)
+                  currentPage < totalPages ? setCurrentPage(currentPage + 1) : setCurrentPage(currentPage)
+                }
                 }
               >
                 Next
