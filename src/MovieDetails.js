@@ -180,7 +180,7 @@ const MovieDetails = () => {
               </button>
             </div>
             <div className="modal-body p-4 flex justify-center">
-              <div className="relative pb-9/16">
+              {/* <div className="relative pb-9/16"> */}
                 <iframe
                   width="700"
                   height="400"
@@ -189,7 +189,7 @@ const MovieDetails = () => {
                   title="Movie Trailer"
                   allowFullScreen
                 ></iframe>
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </motion.div>
