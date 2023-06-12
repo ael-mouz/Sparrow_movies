@@ -175,6 +175,7 @@ const MovieList = () => {
               <Link to={`/movies/${movie.id}`}>
                 <img
                   src={movie.medium_cover_image}
+                  srcset={`${movie.small_cover_image} 300w, ${movie.medium_cover_image} 768w, ${movie.large_cover_image} 1280w`}
                   className="object-cover w-full"
                   alt={movie.title}
                 />
