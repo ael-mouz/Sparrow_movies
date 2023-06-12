@@ -72,7 +72,7 @@ const MovieDetails = () => {
         <nav className="relative z-10">
           <div className="container mx-auto flex items-center justify-between">
             <Link to="/" className="text-2xl font-bold text-black">
-              <div className="flex items-center" style={{ width: "100px" }}>
+              <div className="flex items-center" style={{ width: "80px" }}>
                 <img src={logo} alt="logo" />
               </div>
             </Link>
@@ -88,9 +88,10 @@ const MovieDetails = () => {
               <div className="w-full md:w-2/3">
                 <div className="flex justify-center items-center mb-8">
                   <img
-                    src={movie.large_cover_image}
+                    // src={movie.large_cover_image}
+                    srcset={`${movie.small_cover_image} 300w, ${movie.medium_cover_image} 768w, ${movie.large_cover_image} 1280w`}
                     alt={movie.title}
-                    className="rounded-lg shadow-xl w-full md:w-72 lg:w-96"
+                    className="rounded-lg shadow-xl sm:w-50 md:w-72 lg:w-96"
                   />
                 </div>
                 <div className="text-center mb-8">
@@ -105,7 +106,7 @@ const MovieDetails = () => {
                 <div className="flex flex-col justify-between h-full">
                   <div>
                     <div className="flex justify-between text-gray-400 mb-4">
-                      <div>
+                      <div className="p-4">
                         <p>Rating: {movie.rating}</p>
                         <p>Year: {movie.year}</p>
                         <p>Runtime: {movie.runtime} mins</p>

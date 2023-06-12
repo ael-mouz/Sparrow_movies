@@ -100,10 +100,11 @@ const MovieList = () => {
       </nav>
       <div className="container bg-gray-900 mx-auto pt-8">
         <div className="bg-gray-100 py-2 rounded">
-          <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
+          <div className="container mx-auto flex justify-around gap-1 px-1">
             <div className="relative">
               <select
                 className="border border-gray-300 bg-white rounded-lg py-2 px-2 focus:outline-none "
+                style={{width:"100px"}}
                 onChange={(e) => handleOptionChange("quality", e.target.value)}
               >
                 <option value="All">Quality</option>
@@ -116,6 +117,7 @@ const MovieList = () => {
             <div className="relative">
               <select
                 className="border border-gray-300 bg-white rounded-lg py-2 px-2 focus:outline-none "
+                style={{width:"100px"}}
                 onChange={(e) =>
                   handleOptionChange("minimum_rating", parseInt(e.target.value))
                 }
@@ -131,6 +133,7 @@ const MovieList = () => {
             <div className="relative">
               <select
                 className="border border-gray-300 bg-white rounded-lg py-2 px-2 focus:outline-none "
+                style={{width:"100px"}}
                 onChange={(e) => handleOptionChange("genre", e.target.value)}
               >
                 <option value="">Genre</option>
@@ -144,26 +147,28 @@ const MovieList = () => {
             <div className="relative">
               <select
                 className="border border-gray-300 bg-white rounded-lg py-2 px-2 focus:outline-none "
+                style={{width:"100px"}}
                 onChange={(e) => handleOptionChange("sort_by", e.target.value)}
               >
                 <option value="">Sort By</option>
-                <option value="title">Title</option>
+                {/* <option value="title">Title</option> */}
                 <option value="year">Year</option>
                 <option value="rating">Rating</option>
                 <option value="download_count">Most watched</option>
                 <option value="like_count">Popular</option>
               </select>
             </div>
-            <div className="relative">
+            {/* <div className="relative">
               <select
                 className="border border-gray-300 bg-white rounded-lg py-2 px-2 focus:outline-none "
+                style={{width:"100px"}}
                 onChange={(e) => handleOptionChange("order_by", e.target.value)}
               >
                 <option value="">Order By</option>
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
               </select>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 mt-7">
