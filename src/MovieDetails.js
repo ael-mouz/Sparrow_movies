@@ -12,7 +12,6 @@ const MovieDetails = () => {
   const [error, setError] = useState(null);
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
   const [showDownloadPopup, setShowDownloadPopup] = useState(false);
-
   useEffect(() => {
     const fetchMovieDetails = async () => {
       const url = `https://yts.mx/api/v2/movie_details.json?movie_id=${movieId}&with_images=true&with_cast=true`;
@@ -93,6 +92,15 @@ const MovieDetails = () => {
                     alt={movie.title}
                     className="rounded-lg shadow-xl sm:w-50 md:w-72 lg:w-96"
                   />
+                  {/* <iframe
+                    title="Movie Video"
+                    width="800"
+                    height="450"
+                    src={`https://vidsrc.to/embed/movie/${movie.imdb_code}`}
+                    frameborder="0"
+                    allowfullscreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  ></iframe> */}
                 </div>
                 <div className="text-center mb-8">
                   <h1 className="text-4xl font-semibold text-white mb-2">
@@ -182,14 +190,14 @@ const MovieDetails = () => {
             </div>
             <div className="modal-body p-4 flex justify-center">
               {/* <div className="relative pb-9/16"> */}
-                <iframe
-                  width="700"
-                  height="400"
-                  className="embed-responsive-item"
-                  src={`https://www.youtube.com/embed/${movie.yt_trailer_code}`}
-                  title="Movie Trailer"
-                  allowFullScreen
-                ></iframe>
+              <iframe
+                width="700"
+                height="400"
+                className="embed-responsive-item"
+                src={`https://www.youtube.com/embed/${movie.yt_trailer_code}`}
+                title="Movie Trailer"
+                allowFullScreen
+              ></iframe>
               {/* </div> */}
             </div>
           </div>
@@ -216,7 +224,7 @@ const MovieDetails = () => {
               </button>
             </div>
             <div className="modal-body flex flex-wrap justify-around p-4">
-              {movie.torrents.map((torrent, index) => (
+              {movie.torrents.map((torrent) => (
                 <div key={torrent.size} className="flex items-center mb-4 p-3">
                   <p className="font-semibold mr-2">
                     Quality: {torrent.quality} ({torrent.type})
